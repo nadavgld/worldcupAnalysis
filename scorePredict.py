@@ -1,9 +1,10 @@
 import pandas as pd
+import util
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import LinearRegression
 
-raw_data = pd.read_csv("WorldCup 2018.csv")
-#print(raw_data)
+# raw_data = pd.read_csv("WorldCup 2018.csv")
+raw_data = util.get_csv()
 
 #target data
 home_target = raw_data["Home_Score"]
