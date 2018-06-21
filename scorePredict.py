@@ -40,14 +40,14 @@ rf_home_scoreModel = RandomForestRegressor(n_estimators=100, criterion='mae').fi
 rf_away_scoreModel = RandomForestRegressor(n_estimators=100, criterion='mae').fit(away_var, away_target)
 rf_home_pred = rf_home_scoreModel.predict(home_pred)
 rf_away_pred = rf_away_scoreModel.predict(away_pred)
-print "\nRandom-Forest: \n\t", int(round(rf_home_pred[0])), "-", int(round(rf_away_pred[0]))
+print "\nRandom-Forest: \n\t", int(round(rf_home_pred[0])), "-", int(round(rf_away_pred[0])), "\n w/o round: ", round(rf_home_pred[0],2), "-", round(rf_away_pred[0],2)
 
 # LinearRegression
 lr_home_scoreModel = LinearRegression().fit(home_var, home_target)
 lr_away_scoreModel = LinearRegression().fit(away_var, away_target)
 lr_home_pred = lr_home_scoreModel.predict(home_pred)
 lr_away_pred = lr_away_scoreModel.predict(away_pred)
-print "\nLinear-Regression:\n\t", int(round(lr_home_pred[0])), "-", int(round(lr_away_pred[0]))
+print "\nLinear-Regression:\n\t", int(round(lr_home_pred[0])), "-", int(round(lr_away_pred[0])), "\n w/o round: ", round(lr_home_pred[0],2), "-", round(lr_away_pred[0],2)
 
 # nn
 # def baseline_model():
@@ -65,7 +65,7 @@ print "\nLinear-Regression:\n\t", int(round(lr_home_pred[0])), "-", int(round(lr
 print("\nnn-model:")
 model = Sequential()
 model.add(Dense(4, input_dim=6, activation='relu'))
-model.add(Dense(4, activation='relu'))
+model.add(Dense(1, activation='relu'))
 model.add(Dense(1, activation='linear'))
 model.compile(loss='mse', optimizer='adam')
 model.fit(home_var, home_target, epochs=300, verbose=0)
@@ -75,6 +75,6 @@ nn_away = model.predict(away_pred)
 
 f_home = int(round(float(str(nn_home[0][0]))))
 f_away = int(round(float(str(nn_away[0][0]))))
-print "\t" + str(f_home) + " - " + str(f_away)
+print "\t" + str(f_home) + " - " + str(f_away), "\n w/o round: ", str(round(nn_home[0][0],2)), "-", str(round(nn_away[0][0],2))
 
 print "\n----------------"
